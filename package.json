@@ -1,6 +1,6 @@
 {
-  "name": "w0s-portal",
-  "version": "1.0.0",
+  "name": "@saekitominaga/customelements-portal",
+  "version": "1.0.1",
   "description": "This custom element adds animation movement to the <portal> element and improves some accessibility issues.",
   "main": "portal.mjs",
   "scripts": {
@@ -11,6 +11,8 @@
     "url": "git+https://github.com/SaekiTominaga/customelements-portal.git"
   },
   "keywords": [
+    "web-components",
+    "custom-elements",
     "portal"
   ],
   "author": "saekitominaga",
@@ -18,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/SaekiTominaga/customelements-portal/issues"
   },
-  "homepage": "https://github.com/SaekiTominaga/customelements-portal#readme"
+  "homepage": "https://github.com/SaekiTominaga/customelements-portal#readme",
+  "publishConfig": {
+    "access": "public"
+  }
 }

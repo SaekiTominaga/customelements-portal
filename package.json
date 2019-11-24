@@ -1,7 +1,7 @@
 {
   "name": "w0s-portal",
   "version": "1.0.0",
-  "description": "Implement something like <portal> in a Custom Elements.",
+  "description": "This custom element adds animation movement to the <portal> element and improves some accessibility issues.",
   "main": "portal.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

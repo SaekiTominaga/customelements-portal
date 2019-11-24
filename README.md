@@ -2,9 +2,9 @@
 
 This custom element adds animation movement to the [&lt;portal&gt; element](https://wicg.github.io/portals/) and improves some accessibility issues.
 
-## Sample
+## Demo
 
-- [Sample](https://saekitominaga.github.io/customelements-portal/sample.html)
+- [Demo page](https://saekitominaga.github.io/customelements-portal/demo.html)
 
 ## Attributes
 

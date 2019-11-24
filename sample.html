@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>&lt;w0s-portal&gt; Sample</title>
+<script type="module">
+import CustomElementPortal from './portal.mjs';
+
+const supportPortalElement = window.HTMLPortalElement !== undefined; // Whether the <portal> element is supported
+
+if (supportPortalElement) {
+	if (window.customElements !== undefined) {
+		customElements.define(
+			'w0s-portal', CustomElementPortal
+		);
+	} else {
+		console.info('\'Custom Elements v1\' is not supported.');
+	}
+} else {
+		console.info('<portal> Element is not supported.');
+}
+</script>
+</head>
+<body>
+<h1>&lt;w0s-portal&gt; Sample</h1>
+
+<pre><code>&lt;w0s-portal src="https://example.com/" title="Example.com"&gt;&lt;/w0s-portal&gt;</code></pre>
+
+<p><w0s-portal src="https://example.com/" title="Example.com"></w0s-portal></p>
+
+<p><small>* Please browse with a browser that supports the <a href="https://wicg.github.io/portals/">&lt;portal&gt; Element</a>. As of November 2019, Chrome 78 is supported with <b>chrome://flags/#enable-portals</b> enabled.</small></p>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "w0s-portal",
+  "version": "1.0.0",
+  "description": "Implement something like <portal> in a Custom Elements.",
+  "main": "portal.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SaekiTominaga/customelements-portal.git"
+  },
+  "keywords": [
+    "portal"
+  ],
+  "author": "saekitominaga",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SaekiTominaga/customelements-portal/issues"
+  },
+  "homepage": "https://github.com/SaekiTominaga/customelements-portal#readme"
+}

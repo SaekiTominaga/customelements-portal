@@ -17,7 +17,7 @@ This custom element adds animation movement to the [&lt;portal&gt; element](http
 <dd>Referrer Policy. (Same as <a href="https://wicg.github.io/portals/#element-attrdef-portal-referrerpolicy">referrerpolicy attribute of &lt;portal&gt; Element</a>)</dd>
 </dl>
 
-e.g. `<w0s-portal src="https://example.com/" title="Example.com" referrerpolicy=""></w0s-portal>`
+e.g. `<w0s-portal src="https://example.com/" title="Example.com" referrerpolicy="same-origin"></w0s-portal>`
 
 ## ⚠ Precautions for use
 

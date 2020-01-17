@@ -1,5 +1,7 @@
 # &lt;w0s-portal&gt;
 
+[![npm version](https://badge.fury.io/js/%40saekitominaga%2Fcustomelements-portal.svg)](https://badge.fury.io/js/%40saekitominaga%2Fcustomelements-portal)
+
 This custom element adds animation movement to the [&lt;portal&gt; element](https://wicg.github.io/portals/) and improves some accessibility issues.
 
 ## Demo

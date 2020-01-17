@@ -8,7 +8,7 @@
  *   referrerpolicy="【任意】リファラーポリシー https://html.spec.whatwg.org/multipage/urls-and-fetching.html#referrer-policy-attribute">
  * </x-portal>
  *
- * @version 1.2.0 2020-01-17 CSS を adoptedStyleSheets で設定するように変更
+ * @version 1.2.1 2020-01-17 CSS を adoptedStyleSheets で設定するように変更
  */
 export default class Portal extends HTMLElement {
 	static get observedAttributes() {
@@ -55,7 +55,7 @@ export default class Portal extends HTMLElement {
 			}
 		`;
 
-		const shadow = this.attachShadow({mode: 'open'}).innerHTML;
+		const shadow = this.attachShadow({mode: 'open'});
 		shadow.innerHTML = `
 			<div id="portal-wrap" class="portal-wrap" tabindex="0" role="link" hidden="">
 				<portal id="portal" class="portal"></portal>

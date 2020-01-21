@@ -8,7 +8,7 @@
  *   referrerpolicy="【任意】リファラーポリシー https://html.spec.whatwg.org/multipage/urls-and-fetching.html#referrer-policy-attribute">
  * </x-portal>
  *
- * @version 1.2.1 2020-01-17 CSS を adoptedStyleSheets で設定するように変更
+ * @version 1.2.2 2020-01-21 CSSStyleSheet へのCSSの設定を replaceSync に変更
  */
 export default class Portal extends HTMLElement {
 	static get observedAttributes() {
@@ -64,7 +64,7 @@ export default class Portal extends HTMLElement {
 
 		if (shadow.adoptedStyleSheets !== undefined) {
 			const cssStyleSheet = new CSSStyleSheet();
-			cssStyleSheet.replace(cssString);
+			cssStyleSheet.replaceSync(cssString);
 
 			shadow.adoptedStyleSheets = [cssStyleSheet];
 		} else {
@@ -132,9 +132,9 @@ export default class Portal extends HTMLElement {
 
 		/* 表示位置を変えずに potision: fixed にするため、 top, left, width のスタイルを設定する */
 		const rect = hostElement.getBoundingClientRect();
-		portalWrapElement.style.top = `${Number.parseInt(rect.top)}px`;
-		portalWrapElement.style.left = `${Number.parseInt(rect.left)}px`;
-		portalWrapElement.style.width = `${Number.parseInt(rect.width)}px`;
+		portalWrapElement.style.top = `${rect.top}px`;
+		portalWrapElement.style.left = `${rect.left}px`;
+		portalWrapElement.style.width = `${rect.width}px`;
 
 		/* potision: fixed を使ったフルスクリーン表示にする */
 		setTimeout(() => {

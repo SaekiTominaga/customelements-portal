@@ -1,6 +1,6 @@
 {
   "name": "@saekitominaga/customelements-portal",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "This custom element adds animation movement to the <portal> element and improves some accessibility issues.",
   "main": "portal.mjs",
   "scripts": {

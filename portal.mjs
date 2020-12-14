@@ -1,203 +1,212 @@
+var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, privateMap, value) {
+    if (!privateMap.has(receiver)) {
+        throw new TypeError("attempted to set private field on non-instance");
+    }
+    privateMap.set(receiver, value);
+    return value;
+};
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, privateMap) {
+    if (!privateMap.has(receiver)) {
+        throw new TypeError("attempted to get private field on non-instance");
+    }
+    return privateMap.get(receiver);
+};
+var _portalElement, _supportCSSTypedOM, _portalClickEventListener, _portalTrainsitionEndEventListener;
 /**
  * <portal>
  *
  * @example
  * <x-portal
- *   src="【任意】表示するコンテンツのURL https://wicg.github.io/portals/#element-attrdef-portal-src"
- *   title="【任意】表示するコンテンツのタイトル"
- *   referrerpolicy="【任意】リファラーポリシー https://html.spec.whatwg.org/multipage/urls-and-fetching.html#referrer-policy-attribute">
+ *   src="[Optional] URL of a page to be displayed. https://wicg.github.io/portals/#element-attrdef-portal-src"
+ *   referrerpolicy="[Optional] Referrer Policy. https://html.spec.whatwg.org/multipage/urls-and-fetching.html#referrer-policy-attribute">
  * </x-portal>
  *
- * @version 1.2.2 2020-01-21 CSSStyleSheet へのCSSの設定を replaceSync に変更
+ * @version 2.0.0
  */
 export default class Portal extends HTMLElement {
-	static get observedAttributes() {
-		return ['src', 'referrerpolicy', 'title'];
-	}
-
-	constructor() {
-		super();
-
-		const cssString = `
+    constructor() {
+        super();
+        _portalElement.set(this, void 0);
+        _supportCSSTypedOM.set(this, void 0); // CSS Typed Object Model に対応しているか（Chrome 66+, Chromium Edge） https://caniuse.com/mdn-api_element_attributestylemap
+        _portalClickEventListener.set(this, void 0);
+        _portalTrainsitionEndEventListener.set(this, void 0);
+        __classPrivateFieldSet(this, _supportCSSTypedOM, this.attributeStyleMap !== undefined);
+        const cssString = `
 			:host {
-				--height: 40em;
-				--scale: .5;
-				--transition-duration: .5s;
+				--portal-width: 640px;
+				--portal-height: 360px;
+				--portal-max-width: 100%;
+				--portal-max-height: 100vh;
+				--portal-border-style: solid;
+				--portal-border-width: 1px;
+				--portal-border-color: currentcolor;
+				--portal-scale: .5;
+				--portal-animation-duration: .5s;
+				--portal-outline-style: solid;
+				--portal-outline-width: 1px;
+				--portal-outline-color: currentColor;
+				--portal-outline-offset: 0px;
 
-				display: block;
-				height: calc(var(--height) * var(--scale));
+				display: inline-block;
+				width: min(var(--portal-width), var(--portal-max-width));
+				height: min(var(--portal-height), var(--portal-max-height));
 				position: relative;
 			}
-
-			.portal-wrap {
-				border: 1px solid;
-				box-sizing: border-box;
-				height: var(--height);
-				transform: scale(var(--scale));
-				transform-origin: 0 0;
-				transition: height var(--transition-duration), width var(--transition-duration), top var(--transition-duration), left var(--transition-duration), transform var(--transition-duration);
-			}
-			.portal-wrap.-fullscreen {
-				border: none;
-				position: fixed;
-				height: 100vh;
-				width: 100vw !important;
-				top: 0 !important;
-				left: 0 !important;
-				transform: none;
+			@media (prefers-reduced-motion) {
+				:host {
+					--portal-animation-duration: 0.01s; /* '0s' にすると 'transitionend' イベントの検知ができなくなる */
+				}
 			}
 
 			.portal {
+				border: calc(var(--portal-border-width) / var(--portal-scale)) var(--portal-border-style) var(--portal-border-color);
+				box-sizing: border-box;
 				display: block;
-				width: 100%;
-				height: 100%;
+				width: min(calc(var(--portal-width) / var(--portal-scale)), calc(var(--portal-max-width) / var(--portal-scale)));
+				height: min(calc(var(--portal-height) / var(--portal-scale)), calc(var(--portal-max-height) / var(--portal-scale)));
+				transform: scale(var(--portal-scale));
+				transform-origin: 0 0;
+				transition: width var(--portal-animation-duration), height var(--portal-animation-duration), top var(--portal-animation-duration), left var(--portal-animation-duration), transform var(--portal-animation-duration);
 				cursor: pointer;
 			}
+			.portal:focus {
+				outline: calc(var(--portal-outline-width) / var(--portal-scale)) var(--portal-outline-style) var(--portal-outline-color);
+				outline-offset: calc(var(--portal-outline-offset) / var(--portal-scale));
+			}
+
+			.portal.-fullscreen {
+				--portal-border-width: 0;
+				position: fixed;
+				width: 100vw !important;
+				height: 100vh;
+				top: 0 !important;
+				left: 0 !important;
+				transform: none;
+				z-index: 2147483647;
+			}
 		`;
-
-		const shadow = this.attachShadow({mode: 'open'});
-		shadow.innerHTML = `
-			<div id="portal-wrap" class="portal-wrap" tabindex="0" role="link" hidden="">
-				<portal id="portal" class="portal"></portal>
-			</div>
+        const shadow = this.attachShadow({ mode: 'open' });
+        shadow.innerHTML = `
+			<portal id="portal" class="portal"></portal>
 		`;
-
-		if (shadow.adoptedStyleSheets !== undefined) {
-			const cssStyleSheet = new CSSStyleSheet();
-			cssStyleSheet.replaceSync(cssString);
-
-			shadow.adoptedStyleSheets = [cssStyleSheet];
-		} else {
-			/* adoptedStyleSheets 未対応環境 */
-			shadow.innerHTML += `<style>${cssString}</style>`;
-		}
-
-		this._portalWrapElement = this.shadowRoot.getElementById('portal-wrap');
-		this._portalElement = this.shadowRoot.getElementById('portal');
-
-		this._fullscreentEventListener = this._fullscreenEvent.bind(this);
-		this._activateEventListener = this._activateEvent.bind(this);
-		this.__dispatchPortalClickEventListener = this._dispatchPortalClickEvent.bind(this);
-	}
-
-	connectedCallback() {
-		const hostElement = this;
-		const portalElement = this._portalElement;
-		const portalWrapElement = this._portalWrapElement;
-
-		if (hostElement.src !== null) {
-			portalElement.src = hostElement.src;
-			portalWrapElement.hidden = false;
-		}
-		if (hostElement.referrerpolicy !== null) {
-			portalElement.referrerPolicy = hostElement.referrerpolicy;
-		}
-		if (hostElement.title !== null) {
-			portalWrapElement.setAttribute('aria-label', hostElement.title);
-		}
-
-		portalElement.addEventListener('click', this._fullscreentEventListener);
-		portalWrapElement.addEventListener('transitionend', this._activateEventListener);
-		portalWrapElement.addEventListener('keydown', this.__dispatchPortalClickEventListener);
-	}
-
-	disconnectedCallback() {
-		const portalElement = this._portalElement;
-		const portalWrapElement = this._portalWrapElement;
-
-		portalElement.removeEventListener('click', this._fullscreentEventListener);
-		portalWrapElement.removeEventListener('transitionend', this._activateEventListener);
-		portalWrapElement.removeEventListener('keydown', this.__dispatchPortalClickEventListener);
-	}
-
-	/**
-	 * スイッチの状態を変更する
-	 *
-	 * @param {Event} ev - Event
-	 */
-	_dispatchPortalClickEvent(ev) {
-		switch (ev.key) {
-			case 'Enter':
-				this._portalElement.dispatchEvent(new MouseEvent('click'));
-				break;
-		}
-	}
-
-	/**
-	 * <portal> の包括要素をフルスクリーン表示にする
-	 */
-	_fullscreenEvent() {
-		const hostElement = this;
-		const portalWrapElement = this._portalWrapElement;
-
-		/* 表示位置を変えずに potision: fixed にするため、 top, left, width のスタイルを設定する */
-		const rect = hostElement.getBoundingClientRect();
-		portalWrapElement.style.top = `${rect.top}px`;
-		portalWrapElement.style.left = `${rect.left}px`;
-		portalWrapElement.style.width = `${rect.width}px`;
-
-		/* potision: fixed を使ったフルスクリーン表示にする */
-		setTimeout(() => {
-			portalWrapElement.classList.add('-fullscreen');
-		}, 0);
-	}
-
-	/**
-	 * <portal> をアクティベートする
-	 */
-	_activateEvent() {
-		this._portalElement.activate();
-	}
-
-	attributeChangedCallback(name, oldValue, newValue) {
-		const portalElement = this._portalElement;
-		const portalWrapElement = this._portalWrapElement;
-
-		switch (name) {
-			case 'src':
-				if (newValue !== null) {
-					portalElement.src = newValue;
-					portalWrapElement.hidden = false;
-				} else {
-					portalElement.removeAttribute('src');
-					portalWrapElement.hidden = true;
-				}
-				break;
-			case 'referrerpolicy':
-				if (newValue !== null) {
-					portalElement.referrerPolicy = newValue;
-				} else {
-					portalElement.removeAttribute('referrerpolicy');
-				}
-				break;
-			case 'title':
-				if (newValue !== null) {
-					portalWrapElement.setAttribute('aria-label', this.title);
-				} else {
-					portalWrapElement.removeAttribute('aria-label');
-				}
-				break;
-		}
-	}
-
-	get src() {
-		return this.getAttribute('src');
-	}
-	set src(value) {
-		this.setAttribute('src', value);
-	}
-
-	get referrerpolicy() {
-		return this.getAttribute('referrerpolicy');
-	}
-	set referrerpolicy(value) {
-		this.setAttribute('referrerpolicy', value);
-	}
-
-	get title() {
-		return this.getAttribute('title');
-	}
-	set title(value) {
-		this.setAttribute('title', value);
-	}
+        if (shadow.adoptedStyleSheets !== undefined) {
+            const cssStyleSheet = new CSSStyleSheet();
+            cssStyleSheet.replaceSync(cssString);
+            shadow.adoptedStyleSheets = [cssStyleSheet];
+        }
+        else {
+            /* adoptedStyleSheets 未対応環境 */
+            shadow.innerHTML += `<style>${cssString}</style>`;
+        }
+        __classPrivateFieldSet(this, _portalElement, this.shadowRoot?.getElementById('portal'));
+        __classPrivateFieldSet(this, _portalClickEventListener, this._portalClickEvent.bind(this));
+        __classPrivateFieldSet(this, _portalTrainsitionEndEventListener, this._portalTrainsitionEndEvent.bind(this));
+    }
+    static get observedAttributes() {
+        return ['src', 'referrerpolicy'];
+    }
+    connectedCallback() {
+        const portalElement = __classPrivateFieldGet(this, _portalElement);
+        const src = this.src;
+        if (src !== null) {
+            portalElement.src = src;
+        }
+        const referrerPolicy = this.referrerpolicy;
+        if (referrerPolicy !== null) {
+            portalElement.referrerPolicy = referrerPolicy;
+        }
+        portalElement.addEventListener('click', __classPrivateFieldGet(this, _portalClickEventListener), { passive: true });
+        portalElement.addEventListener('transitionend', __classPrivateFieldGet(this, _portalTrainsitionEndEventListener), { passive: true });
+    }
+    disconnectedCallback() {
+        const portalElement = __classPrivateFieldGet(this, _portalElement);
+        portalElement.removeEventListener('click', __classPrivateFieldGet(this, _portalClickEventListener));
+        portalElement.removeEventListener('transitionend', __classPrivateFieldGet(this, _portalTrainsitionEndEventListener));
+    }
+    attributeChangedCallback(name, _oldValue, newValue) {
+        switch (name) {
+            case 'src': {
+                if (newValue !== null) {
+                    __classPrivateFieldGet(this, _portalElement).src = newValue;
+                }
+                else {
+                    __classPrivateFieldGet(this, _portalElement).removeAttribute('src');
+                }
+                break;
+            }
+            case 'referrerpolicy': {
+                if (newValue !== null) {
+                    __classPrivateFieldGet(this, _portalElement).referrerPolicy = newValue;
+                }
+                else {
+                    __classPrivateFieldGet(this, _portalElement).removeAttribute('referrerpolicy');
+                }
+                break;
+            }
+        }
+    }
+    get src() {
+        return this.getAttribute('src');
+    }
+    set src(value) {
+        if (value !== null) {
+            this.setAttribute('src', value);
+        }
+    }
+    get referrerpolicy() {
+        return this.getAttribute('referrerpolicy');
+    }
+    set referrerpolicy(value) {
+        if (value !== null) {
+            this.setAttribute('referrerpolicy', value);
+        }
+    }
+    /**
+     * <portal> 要素をクリックした時の処理
+     */
+    _portalClickEvent() {
+        this._fullScreen();
+    }
+    /**
+     * <portal> の包括要素のアニメーションが終わった時の処理
+     *
+     * @param {TransitionEvent} ev - Event
+     */
+    _portalTrainsitionEndEvent(ev) {
+        switch (ev.propertyName) { // ウィンドウサイズの変更でもアニメーションが起こってしまうので、とくに height を無視したい
+            case 'transform': {
+                this._activate();
+                break;
+            }
+        }
+    }
+    /**
+     * <portal> の包括要素をフルスクリーン表示にする
+     */
+    _fullScreen() {
+        const portalElement = __classPrivateFieldGet(this, _portalElement);
+        /* 表示位置を変えずに potision: fixed にするための前準備 */
+        const rect = portalElement.getBoundingClientRect();
+        if (__classPrivateFieldGet(this, _supportCSSTypedOM)) {
+            portalElement.attributeStyleMap.set('top', CSS.px(rect.top));
+            portalElement.attributeStyleMap.set('left', CSS.px(rect.left));
+            portalElement.attributeStyleMap.set('width', CSS.px(rect.width));
+        }
+        else {
+            portalElement.style.top = `${rect.top}px`;
+            portalElement.style.left = `${rect.left}px`;
+            portalElement.style.width = `${rect.width}px`;
+        }
+        /* potision: fixed を使ったフルスクリーン表示にする */
+        setTimeout(() => {
+            portalElement.classList.add('-fullscreen');
+        });
+    }
+    /**
+     * <portal> 要素をアクティベートする
+     */
+    _activate() {
+        __classPrivateFieldGet(this, _portalElement).activate();
+    }
 }
+_portalElement = new WeakMap(), _supportCSSTypedOM = new WeakMap(), _portalClickEventListener = new WeakMap(), _portalTrainsitionEndEventListener = new WeakMap();

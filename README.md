@@ -13,17 +13,32 @@ This custom element adds animation movement to the [&lt;portal&gt; element](http
 <dl>
 <dt>src [optional]</dt>
 <dd>URL of a page to be displayed. (Same as <a href="https://wicg.github.io/portals/#element-attrdef-portal-src">src attribute of &lt;portal&gt; Element</a>)</dd>
-<dt>title [optional]</dt>
-<dd>Title of a page to be displayed.</dd>
 <dt>referrerpolicy [optional]</dt>
 <dd>Referrer Policy. (Same as <a href="https://wicg.github.io/portals/#element-attrdef-portal-referrerpolicy">referrerpolicy attribute of &lt;portal&gt; Element</a>)</dd>
 </dl>
 
-e.g. `<w0s-portal src="https://example.com/" title="Example.com" referrerpolicy="same-origin"></w0s-portal>`
+e.g. `<w0s-portal src="https://example.com/" referrerpolicy="same-origin"></w0s-portal>`
+
+## Style customization (CSS custom properties)
+
+| name | deault | Description |
+|-|-|-|
+| --portal-width | 640px | Width of portal |
+| --portal-height | 360px | Height of portal |
+| --portal-max-width | 100% | Maximum width of portal |
+| --portal-max-height | 100vh | Maximum height of portal |
+| --portal-border-style | solid | Border style of portal (`border-style` property) |
+| --portal-border-width | 1px | Border width of portal (`border-width` property) |
+| --portal-border-color | currentcolor | Border color of portal (`border-color` property) |
+| --portal-scale | 0.5 | Amount of scaling of portal (The value of the `scale()` in the `transform` property) |
+| --portal-animation-duration | 0.5s | Time a transition animation (`transition-duration` property) |
+| --portal-outline-style | solid | Outline style of portal (`outline-style` property) |
+| --portal-outline-width | 1px | Outline width of portal (`outline-width` property) |
+| --portal-outline-color | currentColor | Outline color of portal (`outline-color` property) |
+| --portal-outline-offset | 0px | Outline offset of portal (`outline-offset` property) |
+
+\* CSS custom properties names have changed in the version 2.0.0 update. **(Not compatible with version 1 series)**
 
 ## ⚠ Precautions for use
 
-As of November 2019, there is no officially supported browser for the &lt;portal&gt; element. Please note the following points when using.
-
-- Currently, only a limited number of browsers are supported. Chrome 78 is supported with <b>chrome://flags/#enable-portals</b> enabled.
-- Accessibility issues have been reported in Chrome implementations. See [Short note on the portal element](https://codepen.io/stevef/post/short-note-on-the-portals-element) for details. Although this custom element solves some of these problems, it still does not solve the phenomenon of the browser's back button being disabled.
+As of December 2020, there is no officially supported browser for the `&lt;portal&gt;` element. Chrome 87 is supported with <b>chrome://flags/#enable-portals</b> enabled.

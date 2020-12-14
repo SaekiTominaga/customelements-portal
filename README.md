@@ -41,4 +41,4 @@ e.g. `<w0s-portal src="https://example.com/" referrerpolicy="same-origin"></w0s-
 
 ## ⚠ Precautions for use
 
-As of December 2020, there is no officially supported browser for the `&lt;portal&gt;` element. Chrome 87 is supported with <b>chrome://flags/#enable-portals</b> enabled.
+As of December 2020, there is no officially supported browser for the `<portal>` element. Chrome 87 is supported with <b>chrome://flags/#enable-portals</b> enabled.

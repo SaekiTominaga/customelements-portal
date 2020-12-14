@@ -34,7 +34,7 @@ export default class Portal extends HTMLElement {
 				--portal-max-height: 100vh;
 				--portal-border-style: solid;
 				--portal-border-width: 1px;
-				--portal-border-color: currentcolor;
+				--portal-border-color: currentColor;
 				--portal-scale: .5;
 				--portal-animation-duration: .5s;
 				--portal-outline-style: solid;

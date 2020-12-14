@@ -29,7 +29,7 @@ e.g. `<w0s-portal src="https://example.com/" referrerpolicy="same-origin"></w0s-
 | --portal-max-height | 100vh | Maximum height of portal |
 | --portal-border-style | solid | Border style of portal (`border-style` property) |
 | --portal-border-width | 1px | Border width of portal (`border-width` property) |
-| --portal-border-color | currentcolor | Border color of portal (`border-color` property) |
+| --portal-border-color | currentColor | Border color of portal (`border-color` property) |
 | --portal-scale | 0.5 | Amount of scaling of portal (The value of the `scale()` in the `transform` property) |
 | --portal-animation-duration | 0.5s | Time a transition animation (`transition-duration` property) |
 | --portal-outline-style | solid | Outline style of portal (`outline-style` property) |

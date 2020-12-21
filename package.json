@@ -8,6 +8,7 @@
 		"@typescript-eslint/eslint-plugin": "^4.10.0",
 		"@typescript-eslint/parser": "^4.10.0",
 		"brotlin": "^1.1.0",
+		"cpy-cli": "^3.1.1",
 		"eslint": "^7.16.0",
 		"eslint-config-prettier": "^7.1.0",
 		"eslint-plugin-jsdoc": "^30.7.9",
@@ -25,6 +26,7 @@
 		"_ts-watch:compress": "onchange -f add -f change -v dist/Portal.mjs -- brotlin compress dist/Portal.mjs -m 1",
 		"_ts-watch:minify": "onchange -f add -f change -v dist/Portal.mjs -- terser dist/Portal.mjs -o dist/Portal.min.mjs -c ecma=2020 --mangle --ecma 2020 --module --source-map base=dist,filename=Portal.min.mjs,includeSources",
 		"_ts-watch:compress-minify": "onchange -f add -f change -v dist/Portal.min.mjs -- brotlin compress dist/Portal.min.mjs -m 1",
+		"_ts-watch:dts-minify": "onchange -f add -f change -v dist/Portal.mjs.d.ts -- cpy dist/Portal.mjs.d.ts dist --rename=Portal.min.mjs.d.ts",
 		"ts-watch": "run-p _ts-watch:*"
 	},
 	"repository": {

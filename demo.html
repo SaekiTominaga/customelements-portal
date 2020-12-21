@@ -4,12 +4,6 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
 		<title>&lt;w0s-portal&gt; Sample</title>
 		<style>
-			.source {
-				margin: 1em 0 2em;
-				padding: 1em;
-				border: 1px solid #999;
-			}
-
 			#support {
 				padding: 1em;
 				border: 1px solid #f00;
@@ -23,7 +17,7 @@
 			}
 		</style>
 		<script type="module">
-			import CustomElementPortal from './portal.mjs';
+			import CustomElementPortal from './dist/portal.mjs';
 
 			if (window.HTMLPortalElement !== undefined) {
 				customElements.define('w0s-portal', CustomElementPortal);
@@ -38,11 +32,6 @@
 	</head>
 	<body>
 		<h1>&lt;w0s-portal&gt; Sample</h1>
-
-		<p class="source">
-			Source code: <a href="https://github.com/SaekiTominaga/customelements-portal/blob/main/Portal.mjs.ts">src (TypeScript)</a>,
-			<a href="https://github.com/SaekiTominaga/customelements-portal/blob/main/Portal.mjs">dist (JavaScript)</a>
-		</p>
 
 		<p hidden="" id="support">
 			<strong>Your browser does not support the &lt;portal&gt; Element.</strong> Please browse in Chrome with <b>chrome://flags/#enable-portals</b>.

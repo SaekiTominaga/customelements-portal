@@ -39,3 +39,4 @@ export default class Portal extends HTMLElement {
      */
     private _activate;
 }
+//# sourceMappingURL=Portal.mjs.d.ts.map

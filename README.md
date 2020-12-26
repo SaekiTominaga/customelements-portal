@@ -1,8 +1,8 @@
-# &lt;w0s-portal&gt;
+# Animated motion &lt;portal&gt; by Custom Elements
 
 [![npm version](https://badge.fury.io/js/%40saekitominaga%2Fcustomelements-portal.svg)](https://badge.fury.io/js/%40saekitominaga%2Fcustomelements-portal)
 
-This custom element adds animation movement to the [&lt;portal&gt; element](https://wicg.github.io/portals/) and improves some accessibility issues.
+Add animated motion to the [&lt;portal&gt; element](https://wicg.github.io/portals/) by Custom Elements.
 
 ## Demo
 
@@ -17,7 +17,7 @@ This custom element adds animation movement to the [&lt;portal&gt; element](http
 <dd>Referrer Policy. (Same as <a href="https://wicg.github.io/portals/#element-attrdef-portal-referrerpolicy">referrerpolicy attribute of &lt;portal&gt; Element</a>)</dd>
 </dl>
 
-e.g. `<w0s-portal src="https://example.com/" referrerpolicy="same-origin"></w0s-portal>`
+e.g. `<x-portal src="https://example.com/" referrerpolicy="same-origin"></x-portal>`
 
 ## Style customization (CSS custom properties)
 

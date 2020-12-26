@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
-		<title>&lt;w0s-portal&gt; Sample</title>
+		<title>&lt;x-portal&gt; Sample</title>
 		<style>
 			#support {
 				padding: 1em;
@@ -20,18 +20,18 @@
 			import CustomElementPortal from './dist/portal.mjs';
 
 			if (window.HTMLPortalElement !== undefined) {
-				customElements.define('w0s-portal', CustomElementPortal);
+				customElements.define('x-portal', CustomElementPortal);
 			} else {
 				document.getElementById('support').hidden = false;
 			}
 
-			const portalElement = document.createElement('w0s-portal');
+			const portalElement = document.createElement('x-portal');
 			portalElement.src = 'demo-portal.html';
 			document.getElementById('js-generate').replaceWith(portalElement);
 		</script>
 	</head>
 	<body>
-		<h1>&lt;w0s-portal&gt; Sample</h1>
+		<h1>&lt;x-portal&gt; Sample</h1>
 
 		<p hidden="" id="support">
 			<strong>Your browser does not support the &lt;portal&gt; Element.</strong> Please browse in Chrome with <b>chrome://flags/#enable-portals</b>.
@@ -40,9 +40,9 @@
 		<section>
 			<h2>`src` attribute</h2>
 
-			<pre><code>&lt;w0s-portal src="demo-portal.html"&gt;&lt;/w0s-portal&gt;</code></pre>
+			<pre><code>&lt;x-portal src="demo-portal.html"&gt;&lt;/x-portal&gt;</code></pre>
 
-			<p><w0s-portal src="demo-portal.html"></w0s-portal></p>
+			<p><x-portal src="demo-portal.html"></x-portal></p>
 		</section>
 
 		<section>
@@ -54,9 +54,9 @@
 		<section>
 			<h2>`referrerpolicy` attribute</h2>
 
-			<pre><code>&lt;w0s-portal src="demo-portal.html" referrerpolicy="origin"&gt;&lt;/w0s-portal&gt;</code></pre>
+			<pre><code>&lt;x-portal src="demo-portal.html" referrerpolicy="origin"&gt;&lt;/x-portal&gt;</code></pre>
 
-			<p><w0s-portal src="demo-portal.html" referrerpolicy="origin"></w0s-portal></p>
+			<p><x-portal src="demo-portal.html" referrerpolicy="origin"></x-portal></p>
 		</section>
 	</body>
 </html>

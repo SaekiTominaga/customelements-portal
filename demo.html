@@ -17,10 +17,10 @@
 			}
 		</style>
 		<script type="module">
-			import CustomElementPortal from './dist/portal.mjs';
+			import Portal from './dist/Portal.mjs';
 
 			if (window.HTMLPortalElement !== undefined) {
-				customElements.define('x-portal', CustomElementPortal);
+				customElements.define('x-portal', Portal);
 			} else {
 				document.getElementById('support').hidden = false;
 			}

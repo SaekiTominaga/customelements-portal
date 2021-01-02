@@ -1,8 +1,8 @@
-# Animated motion `&lt;portal&gt;` by Custom Elements
+# Animated motion `<portal>` by Custom Elements
 
 [![npm version](https://badge.fury.io/js/%40saekitominaga%2Fcustomelements-portal.svg)](https://badge.fury.io/js/%40saekitominaga%2Fcustomelements-portal)
 
-Add animated motion to the [&lt;portal&gt; element](https://wicg.github.io/portals/) by Custom Elements.
+Add animated motion to the [`<portal>` element](https://wicg.github.io/portals/) by Custom Elements.
 
 ## Demo
 

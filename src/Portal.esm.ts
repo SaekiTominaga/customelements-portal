@@ -1,13 +1,7 @@
 /**
  * <portal>
  *
- * @example
- * <x-portal
- *   src="[Optional] URL of a page to be displayed. https://wicg.github.io/portals/#element-attrdef-portal-src"
- *   referrerpolicy="[Optional] Referrer Policy. https://html.spec.whatwg.org/multipage/urls-and-fetching.html#referrer-policy-attribute">
- * </x-portal>
- *
- * @version 2.0.0
+ * @version 2.1.0
  */
 export default class Portal extends HTMLElement {
 	#portalElement: HTMLPortalElement;

@@ -204,3 +204,4 @@ export default class Portal extends HTMLElement {
     }
 }
 _portalElement = new WeakMap(), _supportCSSTypedOM = new WeakMap(), _portalClickEventListener = new WeakMap(), _portalTrainsitionEndEventListener = new WeakMap();
+//# sourceMappingURL=Portal.js.map

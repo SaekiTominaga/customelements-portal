@@ -33,4 +33,4 @@ export default class Portal extends HTMLElement {
      */
     private _activate;
 }
-//# sourceMappingURL=Portal.esm.d.ts.map
+//# sourceMappingURL=Portal.d.ts.map

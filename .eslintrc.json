@@ -5,11 +5,6 @@
 		"es2021": true
 	},
 	"extends": ["eslint:recommended"],
-	"globals": {
-		"HTMLCollectionOf": "readonly",
-		"HTMLPortalElement": "readonly",
-		"NodeListOf": "readonly"
-	},
 	"plugins": ["jsdoc"],
 	"parserOptions": {
 		"ecmaVersion": 2021,

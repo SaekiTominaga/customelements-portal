@@ -10,10 +10,10 @@ Add animated motion to the [`<portal>` element](https://wicg.github.io/portals/)
 
 ## Examples
 
-```
+```HTML
 <x-portal
   src="foo.html"
-  referrerpolicy="origin"
+  referrerpolicy="origin">
 </x-portal>
 ```
 

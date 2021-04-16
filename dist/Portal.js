@@ -14,8 +14,6 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var _portalElement, _supportCSSTypedOM, _portalClickEventListener, _portalTrainsitionEndEventListener;
 /**
  * <portal>
- *
- * @version 2.1.0
  */
 export default class Portal extends HTMLElement {
     constructor() {
@@ -109,7 +107,7 @@ export default class Portal extends HTMLElement {
         if (referrerPolicy !== null) {
             portalElement.referrerPolicy = referrerPolicy;
         }
-        portalElement.addEventListener('click', __classPrivateFieldGet(this, _portalClickEventListener), { passive: true });
+        portalElement.addEventListener('click', __classPrivateFieldGet(this, _portalClickEventListener));
         portalElement.addEventListener('transitionend', __classPrivateFieldGet(this, _portalTrainsitionEndEventListener), { passive: true });
     }
     disconnectedCallback() {
@@ -157,8 +155,11 @@ export default class Portal extends HTMLElement {
     }
     /**
      * <portal> 要素をクリックした時の処理
+     *
+     * @param {Event} ev - Event
      */
-    _portalClickEvent() {
+    _portalClickEvent(ev) {
+        ev.preventDefault();
         this._fullScreen();
     }
     /**

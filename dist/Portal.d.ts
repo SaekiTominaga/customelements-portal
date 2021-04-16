@@ -1,7 +1,5 @@
 /**
  * <portal>
- *
- * @version 2.1.0
  */
 export default class Portal extends HTMLElement {
     #private;
@@ -16,6 +14,8 @@ export default class Portal extends HTMLElement {
     set referrerpolicy(value: string | null);
     /**
      * <portal> 要素をクリックした時の処理
+     *
+     * @param {Event} ev - Event
      */
     private _portalClickEvent;
     /**

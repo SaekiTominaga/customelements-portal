@@ -1,14 +1,12 @@
 /**
  * <portal>
- *
- * @version 2.1.0
  */
 export default class Portal extends HTMLElement {
 	#portalElement: HTMLPortalElement;
 
 	#supportCSSTypedOM: boolean; // CSS Typed Object Model に対応しているか（Chrome 66+, Chromium Edge） https://caniuse.com/mdn-api_element_attributestylemap
 
-	#portalClickEventListener: () => void;
+	#portalClickEventListener: (ev: MouseEvent) => void;
 	#portalTrainsitionEndEventListener: (ev: TransitionEvent) => void;
 
 	static get observedAttributes(): string[] {
@@ -109,7 +107,7 @@ export default class Portal extends HTMLElement {
 			portalElement.referrerPolicy = referrerPolicy;
 		}
 
-		portalElement.addEventListener('click', this.#portalClickEventListener, { passive: true });
+		portalElement.addEventListener('click', this.#portalClickEventListener);
 		portalElement.addEventListener('transitionend', this.#portalTrainsitionEndEventListener, { passive: true });
 	}
 
@@ -163,8 +161,12 @@ export default class Portal extends HTMLElement {
 
 	/**
 	 * <portal> 要素をクリックした時の処理
+	 *
+	 * @param {Event} ev - Event
 	 */
-	private _portalClickEvent(): void {
+	private _portalClickEvent(ev: MouseEvent): void {
+		ev.preventDefault();
+
 		this._fullScreen();
 	}
 

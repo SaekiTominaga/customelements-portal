@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
-		<title>`Portal.js` Demo</title>
+		<title>`PortalAnimation.js` Demo</title>
 		<style>
 			#support {
 				padding: 1em;
@@ -17,15 +17,15 @@
 			}
 		</style>
 		<script type="module">
-			import Portal from './dist/Portal.js';
+			import PortalAnimation from './dist/PortalAnimation.js';
 
 			if (window.HTMLPortalElement !== undefined) {
-				customElements.define('x-portal', Portal);
+				customElements.define('x-portal-animation', PortalAnimation);
 			} else {
 				document.getElementById('support').hidden = false;
 			}
 
-			const portalElement = document.createElement('x-portal');
+			const portalElement = document.createElement('x-portal-animation');
 			portalElement.src = 'demo-portal.html';
 			document.getElementById('js-generate').replaceWith(portalElement);
 		</script>
@@ -40,17 +40,17 @@
 		<section>
 			<h2>`src` attribute</h2>
 
-			<pre><code>&lt;x-portal src="demo-portal.html"&gt;&lt;/x-portal&gt;</code></pre>
+			<pre><code>&lt;x-portal-animation src="demo-portal.html"&gt;&lt;/x-portal-animation&gt;</code></pre>
 
-			<p><x-portal src="demo-portal.html"></x-portal></p>
+			<p><x-portal-animation src="demo-portal.html"></x-portal-animation></p>
 		</section>
 
 		<section>
 			<h2>`referrerpolicy` attribute</h2>
 
-			<pre><code>&lt;x-portal src="demo-portal.html" referrerpolicy="origin"&gt;&lt;/x-portal&gt;</code></pre>
+			<pre><code>&lt;x-portal-animation src="demo-portal.html" referrerpolicy="origin"&gt;&lt;/x-portal-animation&gt;</code></pre>
 
-			<p><x-portal src="demo-portal.html" referrerpolicy="origin"></x-portal></p>
+			<p><x-portal-animation src="demo-portal.html" referrerpolicy="origin"></x-portal-animation></p>
 		</section>
 
 		<section>

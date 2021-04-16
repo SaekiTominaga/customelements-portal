@@ -18,9 +18,9 @@
 		"src"
 	],
 	"type": "module",
-	"main": "dist/Portal.js",
-	"module": "dist/Portal.js",
-	"types": "dist/Portal.d.ts",
+	"main": "dist/PortalAnimation.js",
+	"module": "dist/PortalAnimation.js",
+	"types": "dist/PortalAnimation.d.ts",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/SaekiTominaga/customelements-portal.git"

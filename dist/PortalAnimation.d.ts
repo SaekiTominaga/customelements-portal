@@ -1,5 +1,5 @@
 /**
- * <portal>
+ * Add animated motion to the `<portal>` element by Custom Elements
  */
 export default class Portal extends HTMLElement {
     #private;
@@ -17,20 +17,20 @@ export default class Portal extends HTMLElement {
      *
      * @param {Event} ev - Event
      */
-    private _portalClickEvent;
+    private portalClickEvent;
     /**
      * <portal> の包括要素のアニメーションが終わった時の処理
      *
      * @param {TransitionEvent} ev - Event
      */
-    private _portalTrainsitionEndEvent;
+    private portalTrainsitionEndEvent;
     /**
      * <portal> の包括要素をフルスクリーン表示にする
      */
-    private _fullScreen;
+    private fullScreen;
     /**
      * <portal> 要素をアクティベートする
      */
-    private _activate;
+    private activate;
 }
-//# sourceMappingURL=Portal.d.ts.map
+//# sourceMappingURL=PortalAnimation.d.ts.map

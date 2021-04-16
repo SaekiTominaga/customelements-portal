@@ -11,22 +11,22 @@ Add animated motion to the [`<portal>` element](https://wicg.github.io/portals/)
 ## Examples
 
 ```HTML
-<x-portal
+<x-portal-animation
   src="foo.html"
   referrerpolicy="origin">
-</x-portal>
+</x-portal-animation>
 ```
 
 ## Attributes
 
 <dl>
-<dt>src [optional]</dt>
+<dt><code>src</code> [optional]</dt>
 <dd>URL of a page to be displayed. (Same as <a href="https://wicg.github.io/portals/#element-attrdef-portal-src">src attribute of &lt;portal&gt; Element</a>)</dd>
-<dt>referrerpolicy [optional]</dt>
+<dt><code>referrerpolicy</code> [optional]</dt>
 <dd>Referrer Policy. (Same as <a href="https://wicg.github.io/portals/#element-attrdef-portal-referrerpolicy">referrerpolicy attribute of &lt;portal&gt; Element</a>)</dd>
 </dl>
 
-e.g. `<x-portal src="https://example.com/" referrerpolicy="same-origin"></x-portal>`
+e.g. `<x-portal-animation src="https://example.com/" referrerpolicy="same-origin"></x-portal-animation>`
 
 ## Style customization (CSS custom properties)
 

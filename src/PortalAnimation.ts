@@ -1,5 +1,5 @@
 /**
- * <portal>
+ * Add animated motion to the `<portal>` element by Custom Elements
  */
 export default class Portal extends HTMLElement {
 	#portalElement: HTMLPortalElement;
@@ -90,8 +90,8 @@ export default class Portal extends HTMLElement {
 
 		this.#portalElement = <HTMLPortalElement>this.shadowRoot?.getElementById('portal');
 
-		this.#portalClickEventListener = this._portalClickEvent.bind(this);
-		this.#portalTrainsitionEndEventListener = this._portalTrainsitionEndEvent.bind(this);
+		this.#portalClickEventListener = this.portalClickEvent.bind(this);
+		this.#portalTrainsitionEndEventListener = this.portalTrainsitionEndEvent.bind(this);
 	}
 
 	connectedCallback(): void {
@@ -164,10 +164,10 @@ export default class Portal extends HTMLElement {
 	 *
 	 * @param {Event} ev - Event
 	 */
-	private _portalClickEvent(ev: MouseEvent): void {
+	private portalClickEvent(ev: MouseEvent): void {
 		ev.preventDefault();
 
-		this._fullScreen();
+		this.fullScreen();
 	}
 
 	/**
@@ -175,10 +175,10 @@ export default class Portal extends HTMLElement {
 	 *
 	 * @param {TransitionEvent} ev - Event
 	 */
-	private _portalTrainsitionEndEvent(ev: TransitionEvent): void {
+	private portalTrainsitionEndEvent(ev: TransitionEvent): void {
 		switch (ev.propertyName) { // ウィンドウサイズの変更でもアニメーションが起こってしまうので、とくに height を無視したい
 			case 'transform': {
-				this._activate();
+				this.activate();
 				break;
 			}
 		}
@@ -187,7 +187,7 @@ export default class Portal extends HTMLElement {
 	/**
 	 * <portal> の包括要素をフルスクリーン表示にする
 	 */
-	private _fullScreen(): void {
+	private fullScreen(): void {
 		const portalElement = this.#portalElement;
 
 		/* 表示位置を変えずに potision: fixed にするための前準備 */
@@ -212,7 +212,7 @@ export default class Portal extends HTMLElement {
 	/**
 	 * <portal> 要素をアクティベートする
 	 */
-	private _activate(): void {
+	private activate(): void {
 		this.#portalElement.activate();
 	}
 }

@@ -13,7 +13,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 };
 var _portalElement, _supportCSSTypedOM, _portalClickEventListener, _portalTrainsitionEndEventListener;
 /**
- * <portal>
+ * Add animated motion to the `<portal>` element by Custom Elements
  */
 export default class Portal extends HTMLElement {
     constructor() {
@@ -91,8 +91,8 @@ export default class Portal extends HTMLElement {
             shadow.innerHTML += `<style>${cssString}</style>`;
         }
         __classPrivateFieldSet(this, _portalElement, this.shadowRoot?.getElementById('portal'));
-        __classPrivateFieldSet(this, _portalClickEventListener, this._portalClickEvent.bind(this));
-        __classPrivateFieldSet(this, _portalTrainsitionEndEventListener, this._portalTrainsitionEndEvent.bind(this));
+        __classPrivateFieldSet(this, _portalClickEventListener, this.portalClickEvent.bind(this));
+        __classPrivateFieldSet(this, _portalTrainsitionEndEventListener, this.portalTrainsitionEndEvent.bind(this));
     }
     static get observedAttributes() {
         return ['src', 'referrerpolicy'];
@@ -158,19 +158,19 @@ export default class Portal extends HTMLElement {
      *
      * @param {Event} ev - Event
      */
-    _portalClickEvent(ev) {
+    portalClickEvent(ev) {
         ev.preventDefault();
-        this._fullScreen();
+        this.fullScreen();
     }
     /**
      * <portal> の包括要素のアニメーションが終わった時の処理
      *
      * @param {TransitionEvent} ev - Event
      */
-    _portalTrainsitionEndEvent(ev) {
+    portalTrainsitionEndEvent(ev) {
         switch (ev.propertyName) { // ウィンドウサイズの変更でもアニメーションが起こってしまうので、とくに height を無視したい
             case 'transform': {
-                this._activate();
+                this.activate();
                 break;
             }
         }
@@ -178,7 +178,7 @@ export default class Portal extends HTMLElement {
     /**
      * <portal> の包括要素をフルスクリーン表示にする
      */
-    _fullScreen() {
+    fullScreen() {
         const portalElement = __classPrivateFieldGet(this, _portalElement);
         /* 表示位置を変えずに potision: fixed にするための前準備 */
         const rect = portalElement.getBoundingClientRect();
@@ -200,9 +200,9 @@ export default class Portal extends HTMLElement {
     /**
      * <portal> 要素をアクティベートする
      */
-    _activate() {
+    activate() {
         __classPrivateFieldGet(this, _portalElement).activate();
     }
 }
 _portalElement = new WeakMap(), _supportCSSTypedOM = new WeakMap(), _portalClickEventListener = new WeakMap(), _portalTrainsitionEndEventListener = new WeakMap();
-//# sourceMappingURL=Portal.js.map
+//# sourceMappingURL=PortalAnimation.js.map

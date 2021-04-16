@@ -1,6 +1,6 @@
 {
 	"name": "@saekitominaga/customelements-portal",
-	"version": "2.2.0",
+	"version": "2.3.0",
 	"description": "Add animated motion to the `<portal>` element by Custom Elements.",
 	"keywords": [
 		"web-components",

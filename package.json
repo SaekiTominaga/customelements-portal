@@ -18,32 +18,24 @@
 		"src"
 	],
 	"type": "module",
-	"browser": "dist/Portal.js",
+	"main": "dist/Portal.js",
+	"module": "dist/Portal.js",
 	"types": "dist/Portal.d.ts",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/SaekiTominaga/customelements-portal.git"
 	},
 	"scripts": {
-		"_build:tsc": "tsc -w",
-		"_build:compress": "onchange -f add -f change -v dist/Portal.js -- brotlin compress dist/Portal.js -m 1",
-		"_build:minify": "onchange -f add -f change -v dist/Portal.js -- terser dist/Portal.js -o dist/Portal.min.js -c ecma=2020 --mangle --ecma 2020 --module --source-map content='dist/Portal.js.map',filename='Portal.js',includeSources,url='Portal.min.js.map'",
-		"_build:minify-compress": "onchange -f add -f change -v dist/Portal.min.js -- brotlin compress dist/Portal.min.js -m 1",
-		"_build:minify-declaration": "onchange -f add -f change -v dist/Portal.d.ts -- cpy dist/Portal.d.ts dist --rename=Portal.min.d.ts",
-		"build": "run-p _build:*"
+		"build": "tsc",
+		"watch": "tsc -w"
 	},
 	"devDependencies": {
 		"@types/w3c-css-typed-object-model-level-1": "^20180410.0.2",
 		"@typescript-eslint/eslint-plugin": "^4.13.0",
 		"@typescript-eslint/parser": "^4.13.0",
-		"brotlin": "^1.1.0",
-		"cpy-cli": "^3.1.1",
 		"eslint": "^7.17.0",
 		"eslint-config-prettier": "^7.1.0",
 		"eslint-plugin-jsdoc": "^30.7.13",
-		"npm-run-all": "^4.1.5",
-		"onchange": "^7.1.0",
-		"terser": "^5.5.1",
 		"typescript": "^4.1.3"
 	},
 	"publishConfig": {
